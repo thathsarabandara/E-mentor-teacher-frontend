@@ -91,8 +91,8 @@ const Login = () => {
       
 
   return (
-    <div className='flex justify-center items-center p-16 min-h-screen'>
-        <div className='flex flex-col xl:flex-row justify-center items-center border-2 rounded-xl'>
+    <div className='flex justify-center items-center p-16 min-h-screen bg-gray-100'>
+        <div className='flex flex-col xl:flex-row justify-center items-center rounded-xl bg-white'>
             <img className='hidden md:block lg:w-[550px] lg:h-[650px] object-cover rounded-lg' src='/assets/images/login.png' alt='login' />
             <div className='flex flex-col justify-center items-center m-6'>
                 <div className='flex flex-col justify-center items-center'>
@@ -117,7 +117,7 @@ const Login = () => {
                         placeholder="Enter your email....."
                     />
                     <Input
-                        label="Passwrd"
+                        label="Password"
                         type="Password"
                         value={password}
                         error={passwordError}
@@ -154,7 +154,7 @@ const Login = () => {
                       <OAuthBtn src='https://img.icons8.com/ios-filled/50/facebook-f.png' label='Facebook' onClick={handleFacebookAuth} />
                       <OAuthBtn src='https://img.icons8.com/ios-filled/50/mac-os.png' label=' Apple' onClick={handleAppleAuth} />
                   </div>
-                  <p className='text-gray-500 text-sm mb-4'>Not Registerd ? <a href='/register' className='text-blue-500 underline hover:text-orange-500'>Register</a></p>
+                  <p className='text-gray-500 text-sm mb-4'>Not Registerd ? <a href='/teacher/auth/register' className='text-blue-500 underline hover:text-orange-500'>Register</a></p>
                 </div>
             </div>
         </div>
