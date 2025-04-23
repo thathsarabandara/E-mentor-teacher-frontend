@@ -94,7 +94,7 @@ const Login = () => {
       
 
   return (
-    <div className='flex justify-center items-center p-16 min-h-screen bg-gray-100'>
+    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
         <div className='flex flex-col xl:flex-row justify-center items-center rounded-xl bg-white w-7/12'>
             <div className='w-1/2 overflow-hidden rounded-l-lg'>
                 <img className='hidden md:block w-full h-full lg:w-[550px] lg:h-[650px] object-cover rounded-lg transform transition ease-in-out duration-300 hover:scale-110' src='/assets/images/login.png' alt='login' />
