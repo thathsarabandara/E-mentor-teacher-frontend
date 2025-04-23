@@ -1,13 +1,16 @@
-import Sidebar from "@/component/sidebar/page";
+import Sidebar from "@/component/sidebar/sidebar";
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <Sidebar />
+    <div className="flex h-screen font-inter">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <div className="overflow-auto w-full">
         <main>{children}</main>
-      </body>
-    </html>
-  )
+      </div>
+    </div>
+  );
 }

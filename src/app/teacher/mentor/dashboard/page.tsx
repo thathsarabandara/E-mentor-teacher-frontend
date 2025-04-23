@@ -1,8 +1,11 @@
+import Navbar from '@/component/Navbar/Navbar'
 import React from 'react'
 
 const Dashboard: React.FC = () => {
   return (
-    <div>Dashboard</div>
+    <div className='bg-gray-100'>
+      <Navbar />
+    </div>
   )
 }
 
