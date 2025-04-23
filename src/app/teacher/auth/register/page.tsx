@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Input from '../../../../component/auth-input/AuthInputContainer' 
 import OAuthBtn from '../../../../component/O-Auth-Btn/OAuthBtn';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 function Page() {
     const [username, setUserName] = useState<string>('');
@@ -16,6 +17,7 @@ function Page() {
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [checkedError, setCheckedError] = useState<string>('');
+    const router = useRouter();
 
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,6 +149,7 @@ function Page() {
                 setEmail('');
                 setPassword('');
                 setConfirmPassword('');
+                router.push('/teacher/auth/verifyuser')
             })
             .catch((error: AxiosError) =>{
                 console.error(error);
@@ -170,7 +173,7 @@ function Page() {
                             <h2 className='text-orange-500 text-bold font-bold text-md md:text-xl'>E-Mentor</h2>
                         </a>
                     </div>
-                    <h1 className='text-inter font-bold text-lg md:text-2xl text-center mb-4' >Create Your E-Mentor<br /> Learning Account</h1>
+                    <h1 className='text-inter font-bold text-lg md:text-2xl text-center mb-4' >Create Your E-Mentor<br /> Teaching Account</h1>
                 </div>
                 {error && <p className='text-red-500  text-xs text-center mb-4'>{error}</p>}
                 <form className='flex flex-col justify-center items-center' onSubmit={handleSubmit}>

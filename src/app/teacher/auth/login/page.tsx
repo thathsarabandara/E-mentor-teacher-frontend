@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Input from '../../../../component/auth-input/AuthInputContainer'
 import OAuthBtn from '../../../../component/O-Auth-Btn/OAuthBtn';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
     const[email , setEmail] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
     const[error , setError] = useState('');
     const[emailError , setEmailError] = useState('');
     const[passwordError , setPasswordError] = useState('');
+    const router = useRouter();
     
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -82,6 +84,7 @@ const Login = () => {
             );
             setEmail('');
             setPassword('');
+            router.push('teacher/mentor')
             window.location.reload();
           } catch (error) {
             console.log(error);
@@ -91,10 +94,12 @@ const Login = () => {
       
 
   return (
-    <div className='flex justify-center items-center p-16 min-h-screen bg-gray-100'>
-        <div className='flex flex-col xl:flex-row justify-center items-center rounded-xl bg-white'>
-            <img className='hidden md:block lg:w-[550px] lg:h-[650px] object-cover rounded-lg' src='/assets/images/login.png' alt='login' />
-            <div className='flex flex-col justify-center items-center m-6'>
+    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
+        <div className='flex flex-col xl:flex-row justify-center items-center rounded-xl bg-white w-7/12'>
+            <div className='w-1/2 overflow-hidden rounded-l-lg'>
+                <img className='hidden md:block w-full h-full lg:w-[550px] lg:h-[650px] object-cover rounded-lg transform transition ease-in-out duration-300 hover:scale-110' src='/assets/images/login.png' alt='login' />
+            </div>
+            <div className='flex flex-col justify-center items-center my-6 w-1/2'>
                 <div className='flex flex-col justify-center items-center'>
                 <div className='flex justify-center items-center drop-shadow-lg'>
                         <a href=''>
@@ -104,7 +109,7 @@ const Login = () => {
                             <h2 className='text-orange-500 text-bold font-bold text-md md:text-xl'>E-Mentor</h2>
                         </a>
                     </div>
-                    <h1 className='text-inter font-bold text-lg md:text-2xl text-center mb-4' >Login to Your E-Mentor Account<br />Continue Your Learning</h1>
+                    <h1 className='text-inter font-bold text-lg md:text-2xl text-center mb-4' >Continue Your Teaching <br/> Journey</h1>
                 </div>
                 {error && <p className='text-red-500  text-xs text-center mb-4'>{error}</p>}
                 <form className='flex flex-col justify-center items-center'>
@@ -141,7 +146,7 @@ const Login = () => {
                     >
                         Login ➜
                     </button>
-                    <p className='text-gray-500 text-sm m-2'>Forgot Password ? <a href='/passresetrequest' className='text-blue-500 underline hover:text-orange-500'>Reset Password</a></p>
+                    <p className='text-gray-500 text-sm m-2'>Forgot Password ? <a href='/teacher/auth/passresetrequest' className='text-blue-500 underline hover:text-orange-500'>Reset Password</a></p>
                 </form>
                 <div className='flex flex-col justify-center item-center' >
                   <div className='flex justify-center items-center m-2' >
