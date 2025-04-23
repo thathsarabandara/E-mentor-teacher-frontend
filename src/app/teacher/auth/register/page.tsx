@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Input from '../../../../component/auth-input/AuthInputContainer' 
 import OAuthBtn from '../../../../component/O-Auth-Btn/OAuthBtn';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 function Page() {
     const [username, setUserName] = useState<string>('');
@@ -16,6 +17,7 @@ function Page() {
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [checkedError, setCheckedError] = useState<string>('');
+    const router = useRouter();
 
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,6 +149,7 @@ function Page() {
                 setEmail('');
                 setPassword('');
                 setConfirmPassword('');
+                router.push('/teacher/auth/verifyuser')
             })
             .catch((error: AxiosError) =>{
                 console.error(error);

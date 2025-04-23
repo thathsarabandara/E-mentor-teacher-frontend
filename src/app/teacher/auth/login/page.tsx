@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Input from '../../../../component/auth-input/AuthInputContainer'
 import OAuthBtn from '../../../../component/O-Auth-Btn/OAuthBtn';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
     const[email , setEmail] = useState('');
@@ -10,6 +11,7 @@ const Login = () => {
     const[error , setError] = useState('');
     const[emailError , setEmailError] = useState('');
     const[passwordError , setPasswordError] = useState('');
+    const router = useRouter();
     
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -82,6 +84,7 @@ const Login = () => {
             );
             setEmail('');
             setPassword('');
+            router.push('teacher/mentor')
             window.location.reload();
           } catch (error) {
             console.log(error);
@@ -143,7 +146,7 @@ const Login = () => {
                     >
                         Login ➜
                     </button>
-                    <p className='text-gray-500 text-sm m-2'>Forgot Password ? <a href='/passresetrequest' className='text-blue-500 underline hover:text-orange-500'>Reset Password</a></p>
+                    <p className='text-gray-500 text-sm m-2'>Forgot Password ? <a href='/teacher/auth/passresetrequest' className='text-blue-500 underline hover:text-orange-500'>Reset Password</a></p>
                 </form>
                 <div className='flex flex-col justify-center item-center' >
                   <div className='flex justify-center items-center m-2' >
