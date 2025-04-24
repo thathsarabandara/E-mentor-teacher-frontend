@@ -1,6 +1,7 @@
 import CourseCompletionChart from '@/component/CourseCompletion-Chart/CourseCompletionChart';
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
+import Footer from '@/component/Footer/Footer';
 import Navbar from '@/component/Navbar/Navbar'
 import ProfileReviewChart from '@/component/ProfileReview-Chart/ProfileReviewChart';
 import ReviewTable from '@/component/ReviewTable-chart/ReviewTable';
@@ -170,6 +171,9 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+        <Footer />
       </div>
     </div>
   )
