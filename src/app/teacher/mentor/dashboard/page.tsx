@@ -3,6 +3,7 @@ import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
 import ProfileReviewChart from '@/component/ProfileReview-Chart/ProfileReviewChart';
+import ReviewTable from '@/component/ReviewTable-chart/ReviewTable';
 import StudentsByCountryChart from '@/component/StudentByCountry-Chart/StudentByCountry';
 import StudentEnrollTrends from '@/component/StudentEnrollTrend-Chart/StudentEnrollTrend';
 import StudentPerformanceDistribution from '@/component/StudentPerformance-Chart/StudentPerformance';
@@ -111,6 +112,14 @@ const Dashboard: React.FC = () => {
     { star: '1★', count: 5 },
   ];
 
+  const latestReviews = [
+    { student: 'Ayesha Perera', rating: 5, comment: 'Excellent explanation of concepts.', date: '2025-04-20' },
+    { student: 'Kasun Silva', rating: 4, comment: 'Good teaching but could add more examples.', date: '2025-04-19' },
+    { student: 'Nuwan Kumara', rating: 5, comment: 'Really engaging sessions!', date: '2025-04-18' },
+    { student: 'Dilani Fernando', rating: 3, comment: 'Decent but needs improvement in pacing.', date: '2025-04-17' },
+    { student: 'Hashan Mendis', rating: 4, comment: 'Great course structure and notes.', date: '2025-04-16' },
+  ];
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
@@ -143,8 +152,13 @@ const Dashboard: React.FC = () => {
             <div className='flex w-full mx-5'>
               <StudentPerformanceDistribution performancesData={performanceData} />
             </div>
-            <div className='flex w-full mx-5'>
-              <ProfileReviewChart reviews={reviewStats} />
+            <div className='flex justify-start items-center w-full mr-6'>
+                <div className="w-1/3">
+                  <ProfileReviewChart reviews={reviewStats} />
+                </div>
+                <div className="w-2/3">
+                  <ReviewTable reviews={latestReviews} />
+                </div>
             </div>
           </div>
           <div className='flex flex-col justify-center items-center w-1/3'>
