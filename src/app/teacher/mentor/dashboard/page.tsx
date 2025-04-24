@@ -1,3 +1,4 @@
+import CourseCompletionChart from '@/component/CourseCompletion-Chart/CourseCompletionChart';
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
@@ -96,22 +97,29 @@ const Dashboard: React.FC = () => {
     { gradeRange: 'Below 50%', studentCount: 10 },
   ];
 
+  const courseData = {
+    completedCourses: 15,
+    ongoingCourses: 8,
+  };
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
         <Navbar />
       </div>
       <div className='bg-gray-50 w-full px-5 py-4'>
-        <div className='grid grid-cols-4 gap-4'>
-          {cardsData.map((card, index) => (
-            <DashboardCard
-              key={index}
-              label={card.label}
-              icon={card.icon}
-              color={card.color}
-              value={card.value}
-            />
-          ))}
+        <div className="flex justify-center items-center">
+          <div className='grid grid-cols-4 gap-4 w-10/12'>
+            {cardsData.map((card, index) => (
+              <DashboardCard
+                key={index}
+                label={card.label}
+                icon={card.icon}
+                color={card.color}
+                value={card.value}
+              />
+            ))}
+          </div>
         </div>
         <div className='flex justify-center items-start w-full mt-6 ml-8'>
           <div className='flex flex-col justify-start items-center w-2/3'>
@@ -127,8 +135,13 @@ const Dashboard: React.FC = () => {
               <StudentPerformanceDistribution performancesData={performanceData} />
             </div>
           </div>
-          <div className='flex justify-center items-center w-1/3'>
-            <StudentsByCountryChart data={CountryData} />
+          <div className='flex flex-col justify-center items-center w-1/3'>
+            <div className="w-full mb-4">
+              <StudentsByCountryChart data={CountryData} />
+            </div>
+            <div className="w-full">
+              <CourseCompletionChart data={courseData} />
+            </div>
           </div>
         </div>
       </div>

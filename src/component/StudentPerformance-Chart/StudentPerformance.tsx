@@ -59,7 +59,7 @@ const StudentPerformanceDistribution: React.FC<StudentPerformanceDistributionPro
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="flex justify-center items-center w-full bg-white rounded-xl mt-6 mr-4 py-3">
       <Bar data={data} options={options} />
     </div>
   );
