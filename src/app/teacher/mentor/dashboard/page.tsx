@@ -1,6 +1,7 @@
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
+import StudentEnrollTrends from '@/component/StudentEnrollTrend/StudentEnrollTrend';
 import React from 'react'
 import { MdAttachMoney, MdGroups, MdLaptopChromebook, MdOutlineCheckCircle, MdOutlineDoneAll, MdOutlinePlayCircleOutline, MdSchool, MdSell } from 'react-icons/md';
 
@@ -56,7 +57,7 @@ const Dashboard: React.FC = () => {
     }
   ];
 
-  const data = [
+  const EarningData = [
     { date: 'Apr 1', earnings: 400 },
     { date: 'Apr 2', earnings: 650 },
     { date: 'Apr 3', earnings: 300 },
@@ -64,6 +65,16 @@ const Dashboard: React.FC = () => {
     { date: 'Apr 5', earnings: 750 },
     { date: 'Apr 6', earnings: 620 },
     { date: 'Apr 7', earnings: 980 },
+  ];
+
+  const EnrollData = [
+    { date: 'Apr 1', enrollments: 12 },
+    { date: 'Apr 2', enrollments: 18 },
+    { date: 'Apr 3', enrollments: 10 },
+    { date: 'Apr 4', enrollments: 22 },
+    { date: 'Apr 5', enrollments: 15 },
+    { date: 'Apr 6', enrollments: 25 },
+    { date: 'Apr 7', enrollments: 20 },
   ];
 
   return (
@@ -83,8 +94,9 @@ const Dashboard: React.FC = () => {
             />
           ))}
         </div>
-        <div className='grid grid-cols-3 gap2 mt-6'>
-          <EarningsChart data={data} />
+        <div className='grid grid-cols-3 gap-4 mt-6'>
+          <EarningsChart data={EarningData} />
+          <StudentEnrollTrends data={EnrollData} />
         </div>
       </div>
     </div>
