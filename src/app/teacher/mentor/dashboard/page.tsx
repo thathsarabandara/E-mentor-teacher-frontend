@@ -3,6 +3,7 @@ import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
 import StudentsByCountryChart from '@/component/StudentByCountry-Chart/StudentByCountry';
 import StudentEnrollTrends from '@/component/StudentEnrollTrend-Chart/StudentEnrollTrend';
+import StudentPerformanceDistribution from '@/component/StudentPerformance-Chart/StudentPerformance';
 import React from 'react'
 import { MdAttachMoney, MdGroups, MdLaptopChromebook, MdOutlineCheckCircle, MdOutlineDoneAll, MdOutlinePlayCircleOutline, MdSchool, MdSell } from 'react-icons/md';
 
@@ -86,6 +87,15 @@ const Dashboard: React.FC = () => {
     { name: 'Canada', value: 80 }
   ];
 
+  const performanceData = [
+    { gradeRange: '90-100%', studentCount: 25 },
+    { gradeRange: '80-89%', studentCount: 40 },
+    { gradeRange: '70-79%', studentCount: 60 },
+    { gradeRange: '60-69%', studentCount: 35 },
+    { gradeRange: '50-59%', studentCount: 20 },
+    { gradeRange: 'Below 50%', studentCount: 10 },
+  ];
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
@@ -103,10 +113,23 @@ const Dashboard: React.FC = () => {
             />
           ))}
         </div>
-        <div className='grid grid-cols-3 gap-4 mt-6'>
-          <EarningsChart data={EarningData} />
-          <StudentEnrollTrends data={EnrollData} />
-          <StudentsByCountryChart data={CountryData} />
+        <div className='flex justify-center items-start w-full mt-6 ml-8'>
+          <div className='flex flex-col justify-start items-center w-2/3'>
+            <div className='flex w-full mx-5'>
+              <div className='w-1/2 mr-4'>
+                <EarningsChart data={EarningData} />
+              </div>
+              <div className='w-1/2 mr-4'>
+                <StudentEnrollTrends data={EnrollData} />
+              </div>
+            </div>
+            <div className='flex w-full mx-5'>
+              <StudentPerformanceDistribution performancesData={performanceData} />
+            </div>
+          </div>
+          <div className='flex justify-center items-center w-1/3'>
+            <StudentsByCountryChart data={CountryData} />
+          </div>
         </div>
       </div>
     </div>
