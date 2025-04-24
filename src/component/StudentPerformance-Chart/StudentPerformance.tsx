@@ -33,7 +33,6 @@ const StudentPerformanceDistribution: React.FC<StudentPerformanceDistributionPro
     plugins: {
       title: {
         display: true,
-        text: 'Student Performance Distribution',
       },
       tooltip: {
         callbacks: {
@@ -59,8 +58,9 @@ const StudentPerformanceDistribution: React.FC<StudentPerformanceDistributionPro
   };
 
   return (
-    <div className="flex justify-center items-center w-full bg-white rounded-xl mt-6 mr-4 py-3">
-      <Bar data={data} options={options} />
+    <div className="flex flex-col justify-center items-start w-11/12 bg-white rounded-xl mt-6 mr-4 py-3 px-16">
+        <h2 className="text-lg font-bold mb-4">Student Performance Distribution</h2>
+        <Bar data={data} options={options} />
     </div>
   );
 };

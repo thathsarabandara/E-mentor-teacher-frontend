@@ -31,7 +31,6 @@ const CourseCompletionChart: React.FC<PieChartProps> = ({ data }) => {
     plugins: {
       title: {
         display: true,
-        text: 'Course Completion Status',
       },
       tooltip: {
         callbacks: {
@@ -42,7 +41,8 @@ const CourseCompletionChart: React.FC<PieChartProps> = ({ data }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full mx-auto bg-white rounded-xl py-17">
+    <div className="flex flex-col items-start justify-start w-full mx-auto bg-white rounded-xl px-10 py-12">
+      <h2 className="text-lg font-bold mb-4">Course Completion Status</h2>
       <Pie data={pieData} options={options} />
     </div>
   );

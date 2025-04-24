@@ -2,6 +2,7 @@ import CourseCompletionChart from '@/component/CourseCompletion-Chart/CourseComp
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
+import ProfileReviewChart from '@/component/ProfileReview-Chart/ProfileReviewChart';
 import StudentsByCountryChart from '@/component/StudentByCountry-Chart/StudentByCountry';
 import StudentEnrollTrends from '@/component/StudentEnrollTrend-Chart/StudentEnrollTrend';
 import StudentPerformanceDistribution from '@/component/StudentPerformance-Chart/StudentPerformance';
@@ -102,6 +103,14 @@ const Dashboard: React.FC = () => {
     ongoingCourses: 8,
   };
 
+  const reviewStats = [
+    { star: '5★', count: 120 },
+    { star: '4★', count: 60 },
+    { star: '3★', count: 25 },
+    { star: '2★', count: 10 },
+    { star: '1★', count: 5 },
+  ];
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
@@ -133,6 +142,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div className='flex w-full mx-5'>
               <StudentPerformanceDistribution performancesData={performanceData} />
+            </div>
+            <div className='flex w-full mx-5'>
+              <ProfileReviewChart reviews={reviewStats} />
             </div>
           </div>
           <div className='flex flex-col justify-center items-center w-1/3'>
