@@ -128,7 +128,7 @@ const Dashboard: React.FC = () => {
       </div>
       <div className='bg-gray-50 w-full px-5 py-4'>
         <div className="flex justify-center items-center">
-          <div className='grid grid-cols-4 gap-4 w-10/12'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full md:w-10/12'>
             {cardsData.map((card, index) => (
               <DashboardCard
                 key={index}
@@ -140,29 +140,33 @@ const Dashboard: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className='flex justify-center items-start w-full mt-6 ml-8'>
-          <div className='flex flex-col justify-start items-center w-2/3'>
-            <div className='flex w-full mx-5'>
-              <div className='w-1/2 mr-4'>
+
+        <div className='flex flex-col lg:flex-row justify-center items-start w-full mt-6 lg:ml-8'>
+          <div className='flex flex-col justify-start items-center w-full lg:w-2/3'>
+            <div className='flex flex-col md:flex-row w-full mx-0 md:mx-5'>
+              <div className='w-full md:w-1/2 md:mr-4 mb-4 md:mb-0'>
                 <EarningsChart data={EarningData} />
               </div>
-              <div className='w-1/2 mr-4'>
+              <div className='w-full md:w-1/2 md:mr-4'>
                 <StudentEnrollTrends data={EnrollData} />
               </div>
             </div>
-            <div className='flex w-full mx-5'>
+
+            <div className='flex w-full mx-0 md:mx-5 mt-4'>
               <StudentPerformanceDistribution performancesData={performanceData} />
             </div>
-            <div className='flex justify-start items-center w-full mr-6'>
-                <div className="w-1/3">
-                  <ProfileReviewChart reviews={reviewStats} />
-                </div>
-                <div className="w-2/3">
-                  <ReviewTable reviews={latestReviews} />
-                </div>
+
+            <div className='flex flex-col md:flex-row justify-start items-center w-full mr-0 md:mr-6 mt-4'>
+              <div className="w-full md:w-1/3 mb-4 md:mb-0">
+                <ProfileReviewChart reviews={reviewStats} />
+              </div>
+              <div className="w-full md:w-2/3">
+                <ReviewTable reviews={latestReviews} />
+              </div>
             </div>
           </div>
-          <div className='flex flex-col justify-center items-center w-1/3'>
+
+          <div className='flex flex-col justify-center items-center w-full lg:w-1/3 mt-6 lg:mt-0'>
             <div className="w-full mb-4">
               <StudentsByCountryChart data={CountryData} />
             </div>
@@ -172,6 +176,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
+
       <div className="w-full">
         <Footer />
       </div>

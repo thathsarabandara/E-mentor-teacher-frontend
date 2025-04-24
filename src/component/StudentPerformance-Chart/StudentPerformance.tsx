@@ -58,7 +58,7 @@ const StudentPerformanceDistribution: React.FC<StudentPerformanceDistributionPro
   };
 
   return (
-    <div className="flex flex-col justify-center items-start w-11/12 bg-white rounded-xl mt-6 mr-4 py-3 px-16">
+    <div className="flex flex-col justify-center items-start w-full md:w-11/12 bg-white rounded-xl mt-6 md:mr-4 py-3 px-4 sm:px-8 md:px-12 lg:px-16">
         <h2 className="text-lg font-bold mb-4">Student Performance Distribution</h2>
         <Bar data={data} options={options} />
     </div>

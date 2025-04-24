@@ -10,7 +10,7 @@ interface StudentByCountryProps {
 
 const StudentsByCountryChart: React.FC<StudentByCountryProps> = ({data}) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg min-w-lg">
+    <div className="bg-white p-6 rounded-lg shadow-lg min-w-sm">
       <h2 className="text-lg font-bold mb-4">Most Students by Country</h2>
       <ResponsiveContainer width="100%" height={400}>
         <PieChart>
