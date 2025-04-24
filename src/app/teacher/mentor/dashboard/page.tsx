@@ -1,4 +1,5 @@
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
+import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
 import React from 'react'
 import { MdAttachMoney, MdGroups, MdLaptopChromebook, MdOutlineCheckCircle, MdOutlineDoneAll, MdOutlinePlayCircleOutline, MdSchool, MdSell } from 'react-icons/md';
@@ -55,12 +56,22 @@ const Dashboard: React.FC = () => {
     }
   ];
 
+  const data = [
+    { date: 'Apr 1', earnings: 400 },
+    { date: 'Apr 2', earnings: 650 },
+    { date: 'Apr 3', earnings: 300 },
+    { date: 'Apr 4', earnings: 900 },
+    { date: 'Apr 5', earnings: 750 },
+    { date: 'Apr 6', earnings: 620 },
+    { date: 'Apr 7', earnings: 980 },
+  ];
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
         <Navbar />
       </div>
-      <div className='bg-gray-100 w-full px-5 py-4'>
+      <div className='bg-gray-50 w-full px-5 py-4'>
         <div className='grid grid-cols-4 gap-4'>
           {cardsData.map((card, index) => (
             <DashboardCard
@@ -71,6 +82,9 @@ const Dashboard: React.FC = () => {
               value={card.value}
             />
           ))}
+        </div>
+        <div className='grid grid-cols-3 gap2 mt-6'>
+          <EarningsChart data={data} />
         </div>
       </div>
     </div>
