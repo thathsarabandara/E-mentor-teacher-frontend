@@ -124,7 +124,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
-        <Navbar />
+        <Navbar name='Dashboard' />
       </div>
       <div className='bg-gray-50 w-full px-5 py-4'>
         <div className="flex justify-center items-center">
@@ -145,10 +145,10 @@ const Dashboard: React.FC = () => {
           <div className='flex flex-col justify-start items-center w-full lg:w-2/3'>
             <div className='flex flex-col md:flex-row w-full mx-0 md:mx-5'>
               <div className='w-full md:w-1/2 md:mr-4 mb-4 md:mb-0'>
-                <EarningsChart data={EarningData} />
+                <EarningsChart data={EarningData} height={200}/>
               </div>
               <div className='w-full md:w-1/2 md:mr-4'>
-                <StudentEnrollTrends data={EnrollData} />
+                <StudentEnrollTrends data={EnrollData} height={200}/>
               </div>
             </div>
 

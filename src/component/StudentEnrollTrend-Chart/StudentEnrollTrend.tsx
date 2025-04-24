@@ -13,13 +13,14 @@ from 'recharts';
 
 type StudentEnrollProp = {
     data:{date: string , enrollments: number}[];
+    height: number,
 }
 
-const StudentEnrollTrends: React.FC<StudentEnrollProp> = ({data}) => {
+const StudentEnrollTrends: React.FC<StudentEnrollProp> = ({data, height}) => {
     return(
-        <div className="bg-white rounded-xl p-4 shadow-sm w-full h-64">
+        <div className="bg-white rounded-xl p-4 shadow-sm w-full">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Student Enrollment Trends</h2>
-            <ResponsiveContainer width="100%" height="85%">
+            <ResponsiveContainer width="100%" height={height}>
                 <LineChart data={data} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
                 <XAxis dataKey="date" tick={{ fontSize: 12, fill: '#6B7280' }} />

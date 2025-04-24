@@ -12,13 +12,14 @@ import {
 
 interface EarningDataProp {
     data: { date:string, earnings:number }[];
+    height: number
 }
 
-const EarningsChart: React.FC<EarningDataProp> = ({data}) => {
+const EarningsChart: React.FC<EarningDataProp> = ({data,height}) => {
   return (
-    <div className="bg-white rounded-xl p-4 pb-12 shadow-sm w-full h-64">
+    <div className="bg-white rounded-xl p-4 pb-4 shadow-sm w-full">
       <h2 className="text-lg font-semibold mb-4">Earnings Over Time</h2>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height={height}>
         <AreaChart data={data} margin={{ top: 10, right: 20, left: -10, bottom: 0 }}>
           <defs>
             <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
