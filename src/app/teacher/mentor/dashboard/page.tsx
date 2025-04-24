@@ -1,7 +1,8 @@
 import DashboardCard from '@/component/DashboardCard/DashboardCard'
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Navbar from '@/component/Navbar/Navbar'
-import StudentEnrollTrends from '@/component/StudentEnrollTrend/StudentEnrollTrend';
+import StudentsByCountryChart from '@/component/StudentByCountry-Chart/StudentByCountry';
+import StudentEnrollTrends from '@/component/StudentEnrollTrend-Chart/StudentEnrollTrend';
 import React from 'react'
 import { MdAttachMoney, MdGroups, MdLaptopChromebook, MdOutlineCheckCircle, MdOutlineDoneAll, MdOutlinePlayCircleOutline, MdSchool, MdSell } from 'react-icons/md';
 
@@ -77,6 +78,14 @@ const Dashboard: React.FC = () => {
     { date: 'Apr 7', enrollments: 20 },
   ];
 
+  const CountryData = [
+    { name: 'Sri Lanka', value: 450 },
+    { name: 'India', value: 300 },
+    { name: 'USA', value: 150 },
+    { name: 'Australia', value: 100 },
+    { name: 'Canada', value: 80 }
+  ];
+
   return (
     <div className='flex min-h-screen flex-col justify-start items-start'>
       <div className='bg-white w-full'>
@@ -97,6 +106,7 @@ const Dashboard: React.FC = () => {
         <div className='grid grid-cols-3 gap-4 mt-6'>
           <EarningsChart data={EarningData} />
           <StudentEnrollTrends data={EnrollData} />
+          <StudentsByCountryChart data={CountryData} />
         </div>
       </div>
     </div>
