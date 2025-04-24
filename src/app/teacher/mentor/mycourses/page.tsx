@@ -44,7 +44,7 @@ const MyCourses: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col justify-start items-start">
       <div className="w-full">
-        <Navbar />
+        <Navbar name='My Course'/>
       </div>
 
       <div className="flex flex-col items-center justify-center  w-11/12  space-y-6">
