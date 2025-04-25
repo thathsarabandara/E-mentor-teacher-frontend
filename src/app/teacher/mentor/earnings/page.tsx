@@ -1,10 +1,21 @@
+'use client'
+import CardDisplay from '@/component/CardDisplay/CardDisplay';
 import DashboardCard from '@/component/DashboardCard/DashboardCard';
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Footer from '@/component/Footer/Footer'
 import Navbar from '@/component/Navbar/Navbar'
-import React from 'react'
+import React, { useState } from 'react'
+import { FaArrowLeft, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 import { MdAttachMoney, MdAccountBalanceWallet, MdMoneyOff, MdTrendingUp } from 'react-icons/md';
+
+type CardData = {
+  cardHolder: string;
+  cardNumber: string;
+  expiry: string;
+  cvv: string;
+};
 
 const cardsData = [
   {
@@ -66,8 +77,107 @@ const EarningData = [
   { date: 'Apr 30', earnings: 970 },
 ];
 
+const initialCards: CardData[] = [
+  {
+    cardHolder: "Thathsara Bandara",
+    cardNumber: "4111111111111111",
+    expiry: "04/28",
+    cvv: "123",
+  },
+  {
+    cardHolder: "John Doe",
+    cardNumber: "5500000000000004",
+    expiry: "10/26",
+    cvv: "456",
+  },
+];
 
 const Earnings: React.FC = () => {
+  const [cards, setCards] = useState<CardData[]>(initialCards);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
+  const [formData, setFormData] = useState<CardData>({
+    cardHolder: "",
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddCardClick = () => {
+    setShowForm(true);
+  };
+
+  const submitWidthdraw = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const res = await fetch("/api/cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      if (res.ok) {
+        setCards([...cards, formData]);
+        setCurrentIndex(cards.length);
+        setShowForm(false);
+        setFormData({
+          cardHolder: "",
+          cardNumber: "",
+          expiry: "",
+          cvv: "",
+        });
+      } else {
+        console.error("Failed to add card");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const submitNewCard = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    try {
+      const res = await fetch("/api/cards", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      if (res.ok) {
+        setCards([...cards, formData]);
+        setCurrentIndex(cards.length);
+        setShowForm(false);
+        setFormData({
+          cardHolder: "",
+          cardNumber: "",
+          expiry: "",
+          cvv: "",
+        });
+      } else {
+        console.error("Failed to add card");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
+
+  const nextCard = () => {
+    setCurrentIndex((prev) => (prev + 1) % cards.length);
+  };
+
+  const prevCard = () => {
+    setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
+  };
+
   return (
     <div className="flex min-h-screen flex-col justify-start items-center bg-gray-100">
       <div className="w-full">
@@ -75,7 +185,7 @@ const Earnings: React.FC = () => {
       </div>
       <div className="flex flex-col justify-center items-center w-full">
         <div className="w-10/12">
-         <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {cardsData.map((card, index) => (
               <DashboardCard
                 key={index}
@@ -85,15 +195,172 @@ const Earnings: React.FC = () => {
                 value={card.value}
               />
             ))}
-         </div>
+          </div>
         </div>
-        <div className="flex justify-center items-center w-11/12  mt-5">
-            <div className="w-1/2">
-              <EarningsChart data={EarningData} height={400}/>
-            </div>
-            <div className="w-1/2">
+        <div className="flex flex-col lg:flex-row justify-center items-center w-11/12 mt-5 gap-6">
+          <div className="w-full lg:w-2/3">
+            <EarningsChart data={EarningData} height={400} />
+          </div>
 
+          <div className="w-full lg:w-1/3 m-4">
+            <div className="w-full flex flex-col items-center justify-center gap-6 bg-white rounded-xl p-6">
+              <p className="font-bold pb-2 text-start">Card Details</p>
+              <div className="w-80 pb-4">
+                <CardDisplay {...cards[currentIndex]} />
+              </div>
+
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  onClick={prevCard}
+                  className="p-2 rounded-full bg-white bg-opacity-10 text-white hover:bg-opacity-20"
+                >
+                  <FaArrowLeft className='text-black' />
+                </button>
+                <button
+                  onClick={nextCard}
+                  className="p-2 rounded-full bg-white bg-opacity-10 text-white hover:bg-opacity-20"
+                >
+                  <FaArrowRight className='text-black' />
+                </button>
+              </div>
+              <button
+                onClick={handleAddCardClick}
+                className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border-2 border-orange-200 hover:border-orange-500 text-black w-9/12 h-12 mb-3"
+                >
+                <IoMdAddCircleOutline className='text-orange-700' />
+                Add New Card
+              </button>
+              {showForm && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-transparent bg-opacity-50 w-full">
+                  <form
+                    onSubmit={submitNewCard}
+                    className="flex flex-col justify-center items-start bg-white p-6 rounded-lg shadow-lg w-96 text-gray-800 space-y-3"
+                  >
+                    <h2 className="text-lg font-bold text-center mb-4">New Payment Card</h2>
+                    <label htmlFor="holderName" className="text-sm">Name</label>
+                    <input
+                      id='holderName'
+                      type="text"
+                      name="cardHolder"
+                      placeholder="Name on card"
+                      value={formData.cardHolder}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full p-2 border border-gray-300 rounded -mt-3 text-sm"
+                    />
+                    <label htmlFor="cardnumber" className="text-sm">Card Number</label>
+                    <input
+                      id='cardnumber'
+                      type="text"
+                      name="cardNumber"
+                      placeholder="Card Number"
+                      value={formData.cardNumber}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full p-2 border border-gray-300 rounded -mt-3 text-sm"
+                    />
+                    <div className='flex justify-center items-center'>
+                      <div className="flex flex-col justify-center items-start">
+                        <label htmlFor="expiredate" className="text-sm">MM /YY</label>
+                        <input
+                          id='expiredate'
+                          type="text"
+                          name="expiry"
+                          placeholder="Expiry (MM/YY)"
+                          value={formData.expiry}
+                          onChange={handleInputChange}
+                          required
+                          className="w-11/12 p-2 border border-gray-300 rounded text-sm"
+                        />
+                      </div>
+                      <div className="flex flex-col justify-center items-start">
+                        <label htmlFor="csv" className="text-sm">CSV</label>
+                        <input
+                          id='csv'
+                          type="text"
+                          name="cvv"
+                          placeholder="CVV"
+                          value={formData.cvv}
+                          onChange={handleInputChange}
+                          required
+                          className="w-11/12 p-2 border border-gray-300 rounded text-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <button
+                        type="button"
+                        onClick={() => setShowForm(false)}
+                        className="px-4 py-2 bg-orange-200 border border-orange-200 rounded hover:bg-transparent hover:border-orange-500"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700"
+                      >
+                        Save Credentials
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
             </div>
+          </div>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-center items-center w-11/12 mt-5 gap-6">
+        <div className="flex flex-col justify-center items-start w-1/3 bg-white rounded p-4 ">
+          <p className="text-lg font-bold mb-4">
+            Widthdraw your money
+          </p>
+          <form 
+            onSubmit={submitWidthdraw}
+            className='w-full'
+            >
+            <div className="flex flex-col justify-center items-start w-full">
+              <label htmlFor="amount" className="text-xs font-bold">Amount</label>
+              <input
+                id='amount'
+                name='amount'
+                type="text" 
+                placeholder='Amount'
+                className="text-sm border border-gray-400 p-2 rounded border border-gray-300 w-full" 
+                required
+                />
+                <div className="flex flex-col gap-4">
+                  <p className="font-bold">Choose Card for Withdrawal</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {cards.map((card, index) => (
+                      <div
+                        key={index}
+                        onClick={() => setSelectedCardIndex(index)}
+                        className={`relative w-full p-4 rounded-lg border-2 cursor-pointer ${
+                          selectedCardIndex === index
+                            ? "border-green-500 bg-green-50"
+                            : "border-gray-300 bg-white"
+                        } text-left flex flex-col gap-1`}
+                      >
+                        {selectedCardIndex === index && (
+                          <FaCheckCircle className="text-green-600 absolute top-2 right-2 text-lg" />
+                        )}
+
+                        <p className="font-semibold">{card.cardHolder}</p>
+                        <p className="text-sm">**** **** **** {card.cardNumber.slice(-4)}</p>
+                        <p className="text-xs">Exp: {card.expiry}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700"
+                >
+                Widthsdraw Money
+                </button>
+            </div>
+          </form>
+        </div>
+        <div className="w-2/3"></div>
         </div>
       </div>
       <div className="w-full">
@@ -103,4 +370,4 @@ const Earnings: React.FC = () => {
   )
 }
 
-export default Earnings
+export default Earnings;
