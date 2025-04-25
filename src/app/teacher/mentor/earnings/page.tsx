@@ -4,6 +4,7 @@ import DashboardCard from '@/component/DashboardCard/DashboardCard';
 import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Footer from '@/component/Footer/Footer'
 import Navbar from '@/component/Navbar/Navbar'
+import PaymentCardView from '@/component/PaymentCardView/PaymentCardView';
 import React, { useState } from 'react'
 import { FaArrowLeft, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 import { IoMdAddCircleOutline } from 'react-icons/io';
@@ -329,7 +330,7 @@ const Earnings: React.FC = () => {
                 />
                 <div className="flex flex-col gap-4">
                   <p className="font-bold">Choose Card for Withdrawal</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 w-full gap-4">
                     {cards.map((card, index) => (
                       <div
                         key={index}
@@ -343,10 +344,7 @@ const Earnings: React.FC = () => {
                         {selectedCardIndex === index && (
                           <FaCheckCircle className="text-green-600 absolute top-2 right-2 text-lg" />
                         )}
-
-                        <p className="font-semibold">{card.cardHolder}</p>
-                        <p className="text-sm">**** **** **** {card.cardNumber.slice(-4)}</p>
-                        <p className="text-xs">Exp: {card.expiry}</p>
+                        <PaymentCardView name={card.cardHolder} date={card.expiry} number={card.cardNumber} />
                       </div>
                     ))}
                   </div>
