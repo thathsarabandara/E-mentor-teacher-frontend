@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { FiGlobe } from "react-icons/fi";
+import { Button } from "../ui/Button";
 
 type SocialProfile = {
   website: string;
@@ -95,7 +96,7 @@ export const SocialProfileForm = () => {
           { icon: <FaWhatsapp />, name: "whatsapp", placeholder: "Phone number", label: "Whatsapp" },
           { icon: <FaYoutube />, name: "youtube", placeholder: "Username", label: "Youtube" },
         ].map((field) => (
-          <div className="">
+          <div className="mb-4">
             <div key={field.name} className="flex flex-col w-full">
                 <label htmlFor={field.name} className="text-sm">{field.label}</label>
                 <div className="flex items-center border rounded px-3 py-2 border-gray-400">
@@ -116,12 +117,7 @@ export const SocialProfileForm = () => {
       </div>
 
       {/* Save Changes button */}
-      <button
-        onClick={handleSubmit}
-        className="mt-6 px-6 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
-      >
-        Save Changes
-      </button>
+      <Button type="submit" className="w-full md:w-auto mt-4">Save Changes</Button>
     </div>
   );
 };
