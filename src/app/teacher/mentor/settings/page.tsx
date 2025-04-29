@@ -1,6 +1,7 @@
 import Footer from '@/component/Footer/Footer'
 import Navbar from '@/component/Navbar/Navbar'
 import ProfileSettings from '@/component/Profile-Settings/ProfileSetting'
+import {SocialProfileForm} from '@/component/SocailProfileForm/SocialProfileForm'
 import React from 'react'
 
 const Settings: React.FC = () => {
@@ -12,6 +13,7 @@ const Settings: React.FC = () => {
       <div className="flex flex-col justify-center items-center w-full">
         <div className='w-11/12'>
           <ProfileSettings />
+          <SocialProfileForm />
         </div>
       </div>
       <div className="w-full">
