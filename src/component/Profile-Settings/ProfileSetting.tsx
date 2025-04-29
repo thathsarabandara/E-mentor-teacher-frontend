@@ -21,8 +21,13 @@ const ProfileSettings = () => {
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+      // Validate file type
+      if (file.type.startsWith("image/")) {
+        const imageUrl = URL.createObjectURL(file);
+        setProfileImage(imageUrl);
+      } else {
+        alert("Invalid file type. Please upload an image.");
+      }
     }
   };
   
