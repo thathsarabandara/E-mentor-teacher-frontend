@@ -1,15 +1,19 @@
+'use client'
 import React, { useState } from "react";
 import { Button } from "../ui/Button";
+import emptyImage from '../../../public/assets/images/emptyProfile.png'
+import Image from "next/image";
 
 const ProfileSettings = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    username: "",
+    dateofbirth: "",
     email: "",
     phoneNumber: "",
-    title: "",
+    proffesion: "",
+    address: "",
     bio: "",
   });
 
@@ -35,86 +39,143 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <h2 className="text-3xl font-semibold mb-6">Profile Settings</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="w-full mx-auto p-6 bg-white rounded">
+      <h2 className="text-xl font-semibold mb-6">Account Settings</h2>
+      <div className="flex justify-center items-start w-full">
         {/* Profile Picture Section */}
-        <div className="flex flex-col items-center">
-          <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-300 mb-4">
-            {profileImage ? (
-              <img src={profileImage} alt="Profile" className="object-cover w-full h-full" />
-            ) : (
-              <div className="flex items-center justify-center h-full text-gray-500">No Image</div>
-            )}
-          </div>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="mb-2"
-          />
+        <div className="flex flex-col items-center w-4/12">
+            <div className="flex flex-col justify-center items-center w-10/12 h-[400px] overflow-hidden border-4 border-gray-300 mb-4">
+                {profileImage ? (
+                <img src={profileImage} alt="Profile" className="object-cover w-full h-full" />
+                ) : (
+                <Image
+                    src={emptyImage}
+                    alt="Default Profile"
+                    className="object-cover w-9/12 h-10/12"
+                />
+                )}
+
+                {/* Custom upload button */}
+                <label
+                htmlFor="profileImageUpload"
+                className="text-center cursor-pointer mt-4 px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 w-full"
+                >
+                Upload Image
+                </label>
+
+                {/* Hidden input */}
+                <input
+                id="profileImageUpload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+                />
+            </div>
         </div>
 
-        {/* Profile Info Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
-            <input
-              type="text"
-              name="phoneNumber"
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              value={formData.title}
-              onChange={handleInputChange}
-              className="border p-2 rounded w-full"
-            />
+        <form onSubmit={handleSubmit} className="space-y-4 w-8/12">
+          <div className="flex flex-col justify-center items-center">
+            <div className="flex justify-center items-center w-full mb-4 border-gray-400">
+                <div className="w-1/2 mr-4">
+                    <label htmlFor="firstname" className="text-sm">First Name</label>
+                    <input
+                    id="firstname"
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    className="border p-2 rounded w-full border-gray-400"
+                    />
+                </div>
+                <div className="w-1/2">
+                    <label htmlFor="lastname" className="text-sm">Last Name</label>
+                    <input
+                        id="lastname"
+                        type="text"
+                        name="lastName"
+                        placeholder="Last Name"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        className="border p-2 rounded w-full border-gray-400"
+                    />
+                </div>
+            </div>
+            <div className="flex justify-center items-center w-full mb-4">
+                <div className="w-1/2 mr-4">
+                    <label htmlFor="dateofbirth" className="text-sm">Date Of Birth</label>
+                    <input
+                        id="dateofbirth"
+                        type="date"
+                        name="dateofbirth"
+                        value={formData.dateofbirth}
+                        onChange={handleInputChange}
+                        className="border p-2 rounded w-full border-gray-400"
+                    />
+                </div>
+                <div className="w-1/2">
+                    <label htmlFor="phonenumber" className="text-sm">Phone Number</label>
+                    <input
+                        id="phonenumber"
+                        type="text"
+                        name="phoneNumber"
+                        placeholder="Phone Number"
+                        value={formData.phoneNumber}
+                        onChange={handleInputChange}
+                        className="border p-2 rounded w-full border-gray-400"
+                    />
+                </div>
+            </div>
+            <div className="w-full mb-4">
+                <label htmlFor="email" className="text-sm">Email</label>
+                <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="border p-2 rounded w-full border-gray-400"
+                />
+            </div>
+            <div className="w-full mb-4">
+                <label htmlFor="proffesion" className="text-sm">Proffesion</label>
+                <input
+                id="proffesion"
+                type="text"
+                name="proffesion"
+                placeholder="Proffesion"
+                value={formData.proffesion}
+                onChange={handleInputChange}
+                className="border p-2 rounded w-full border-gray-400"
+                />
+            </div>
           </div>
-          <textarea
-            name="bio"
-            placeholder="Biography"
-            value={formData.bio}
-            onChange={handleInputChange}
-            rows={4}
-            className="border p-2 rounded w-full"
-          />
+          <div className="w-full mb-4">
+                <label htmlFor="bio" className="text-sm">Biography</label>
+                <textarea
+                    id="bio"
+                    name="bio"
+                    placeholder="Biography"
+                    value={formData.bio}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="border p-2 rounded w-full border-gray-400"
+                />
+            </div>
+            <div className="w-full mb-4">
+                <label htmlFor="address" className="text-sm">Address</label>
+                <textarea
+                    id="address"
+                    name="address"
+                    placeholder="Address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="border p-2 rounded w-full border-gray-400"
+                />
+            </div>
           <Button type="submit" className="w-full md:w-auto">Save Changes</Button>
         </form>
       </div>
