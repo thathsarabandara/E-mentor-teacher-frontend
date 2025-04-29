@@ -2,29 +2,24 @@
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-type WithdrawHistoryItem = {
+export type WithdrawHistoryItem = {
   id: number;
   date: string;
   method: string;
   amount: string;
-  status: "Pending" | "Completed" | "Rejected";
+  status: string;
 };
 
-const initialHistory: WithdrawHistoryItem[] = [
-  { id: 1, date: "2025-04-25", method: "Visa ****1111", amount: "$250.00", status: "Completed" },
-  { id: 2, date: "2025-04-24", method: "Mastercard ****0004", amount: "$120.00", status: "Pending" },
-  { id: 3, date: "2025-04-22", method: "Visa ****9876", amount: "$180.00", status: "Rejected" },
-];
+type WithdrawHistoryProps = {
+  history: WithdrawHistoryItem[];
+  onCancel?: (id: number) => void;
+};
 
-const WithdrawHistory: React.FC = () => {
-  const [history, setHistory] = useState(initialHistory);
+const WithdrawHistory: React.FC<WithdrawHistoryProps> = ({ history, onCancel }) => {
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
 
-  const cancelWithdraw = (id: number) => {
-    const updatedHistory = history.map((item) =>
-      item.id === id ? { ...item, status: "Rejected" } : item
-    );
-    setHistory(updatedHistory);
+  const handleCancel = (id: number) => {
+    onCancel?.(id);
     setOpenMenuId(null);
   };
 
@@ -79,7 +74,7 @@ const WithdrawHistory: React.FC = () => {
                       {openMenuId === item.id && (
                         <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10 border text-sm">
                           <button
-                            onClick={() => cancelWithdraw(item.id)}
+                            onClick={() => handleCancel(item.id)}
                             className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
                           >
                             Cancel Withdrawal
