@@ -97,6 +97,7 @@ const Earnings: React.FC = () => {
   const [cards, setCards] = useState<CardData[]>(initialCards);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showForm, setShowForm] = useState(false);
+  const [amount, setAmount] = useState<number>(0);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [formData, setFormData] = useState<CardData>({
     cardHolder: "",
@@ -109,6 +110,12 @@ const Earnings: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
 
   const handleAddCardClick = () => {
     setShowForm(true);
@@ -314,6 +321,10 @@ const Earnings: React.FC = () => {
           <p className="text-lg font-bold mb-4">
             Widthdraw your money
           </p>
+          <div className="flex flex-col justify-center items-start mb-4">
+              <p className="text-lg font-bold">$16,590.00</p>
+              <p className="text-xs font-bold text-gray-500">Current Balance</p>
+          </div>
           <form 
             onSubmit={submitWidthdraw}
             className='w-full'
@@ -325,10 +336,11 @@ const Earnings: React.FC = () => {
                 name='amount'
                 type="text" 
                 placeholder='Amount'
+                onChange={handleAmountChange}
                 className="text-sm border border-gray-400 p-2 rounded border border-gray-300 w-full" 
                 required
                 />
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col justify-center items-start gap-4 mt-4">
                   <p className="font-bold">Choose Card for Withdrawal</p>
                   <div className="grid grid-cols-1 w-full gap-4">
                     {cards.map((card, index) => (
@@ -351,14 +363,16 @@ const Earnings: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700"
+                  className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700 mt-5"
                 >
                 Widthsdraw Money
                 </button>
             </div>
           </form>
         </div>
-        <div className="w-2/3"></div>
+        <div className="w-2/3">
+        
+        </div>
         </div>
       </div>
       <div className="w-full">

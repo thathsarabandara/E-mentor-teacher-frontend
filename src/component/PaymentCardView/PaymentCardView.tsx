@@ -15,9 +15,9 @@ const PaymentCardView: React.FC<PaymentCardProps> = ({
   return (
     <div className="flex justify-start items-center gap-6 w-full">
         <img className='w-10' src='/assets/images/card/card.png' alt='visa'/>
-        <p className="text-sm text-gray-500">{number}</p>
+        <p className="text-sm text-gray-500">{number.replace(/\d{4}(?=.)/g, "$& ")}</p>
         <p className="text-sm text-gray-500">{date}</p>
-        <p className="text-sm text-gray-500">{name}</p>
+        <p className="text-sm text-gray-500 font-bold">{name}</p>
     </div>
   )
 }
