@@ -31,7 +31,7 @@ const BasicInformationSection: React.FC<BasicInformationSectionProps> = ({setCur
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             <div className='flex flex-col'>
               <label htmlFor="category" className="text-sm">Course Category</label>
               <select className="border border-gray-300 rounded p-3 text-sm" id='category'>
@@ -61,7 +61,7 @@ const BasicInformationSection: React.FC<BasicInformationSectionProps> = ({setCur
             />
           </div>
 
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className='flex flex-col'>
               <label htmlFor="language" className="text-sm">Course Language</label>
               <select className="border border-gray-300 rounded p-3 text-sm" id='language'>
