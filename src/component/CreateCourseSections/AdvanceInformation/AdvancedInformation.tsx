@@ -46,8 +46,8 @@ const AdvancedInformation: React.FC<AdvancedInformationProps> = ({setCurrentStep
     <div className="flex flex-col justify-center items-start w-full mt-4">
         <p className="text-xl font-bold text-left border-b border-gray-200 w-full pb-5">Advanced Informations</p>
         <form onSubmit={handleSubmit}>
-            <div className="flex justify-center items-center w-full my-4 mt-8 border-b border-gray-200 pb-6">
-                <div className="flex flex-col justify-center items-start w-1/2">
+            <div className="flex flex-col md:flex-row justify-center items-center w-full my-4 mt-8 border-b border-gray-200 pb-6">
+                <div className="flex flex-col justify-center items-start md:w-1/2">
                     <p className="text-black mb-3 font-semibold">Course Thumbnail</p>
                     <div className="flex justify-center items-start">
                         <Image src={emptyImage}  alt='image' className="bg-gray-200 p-5 rounded-lg w-1/3" />
@@ -66,7 +66,7 @@ const AdvancedInformation: React.FC<AdvancedInformationProps> = ({setCurrentStep
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col justify-center items-start w-1/2">
+                <div className="flex flex-col justify-center items-start md:w-1/2">
                     <p className="text-black mb-3 font-semibold">Course Trailer</p>
                     <div className="flex justify-center items-start">
                         <Image src={emptyVideo} alt='video' className="bg-gray-200 p-5 rounded-lg w-1/3" />
