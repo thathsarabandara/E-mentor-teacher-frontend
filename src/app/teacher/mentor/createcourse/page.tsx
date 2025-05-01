@@ -1,6 +1,7 @@
 'use client'
 import AdvancedInformation from '@/component/CreateCourseSections/AdvanceInformation/AdvancedInformation';
 import BasicInformationSection from '@/component/CreateCourseSections/BasicInformation/BasicInformationSection';
+import Curriculum from '@/component/CreateCourseSections/Curriculum/Curriculum';
 import Footer from '@/component/Footer/Footer'
 import Navbar from '@/component/Navbar/Navbar'
 import React, { useState } from 'react'
@@ -55,7 +56,7 @@ const CreateCourse: React.FC = () => {
         <AdvancedInformation setCurrentStep={setCurrentStep} />
       )}
       {currentStep === 2 && (
-        <div className="text-center text-gray-500">Curriculum Section</div>
+        <Curriculum />
       )}
       {currentStep === 3 && (
         <div className="text-center text-gray-500">Publish Course Section</div>
