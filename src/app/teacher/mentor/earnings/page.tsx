@@ -5,6 +5,7 @@ import EarningsChart from '@/component/Earning-Chart/EarningChart';
 import Footer from '@/component/Footer/Footer'
 import Navbar from '@/component/Navbar/Navbar'
 import PaymentCardView from '@/component/PaymentCardView/PaymentCardView';
+import WithdrawHistory, { WithdrawHistoryItem } from '@/component/widthdraw-table/WithdrawHistory';
 import React, { useState } from 'react'
 import { FaArrowLeft, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 import { IoMdAddCircleOutline } from 'react-icons/io';
@@ -97,6 +98,7 @@ const Earnings: React.FC = () => {
   const [cards, setCards] = useState<CardData[]>(initialCards);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showForm, setShowForm] = useState(false);
+  const [amount, setAmount] = useState<number>(0);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
   const [formData, setFormData] = useState<CardData>({
     cardHolder: "",
@@ -105,10 +107,30 @@ const Earnings: React.FC = () => {
     cvv: "",
   });
 
+  const [history, setHistory] = useState<WithdrawHistoryItem[]>([
+    { id: 1, date: "2025-04-25", method: "Visa ****1111", amount: "$250.00", status: "Completed" },
+    { id: 2, date: "2025-04-24", method: "Mastercard ****0004", amount: "$120.00", status: "Pending" },
+    { id: 3, date: "2025-04-22", method: "Visa ****9876", amount: "$180.00", status: "Rejected" },
+  ]);
+
+  const handleCancelWithdraw = (id: number) => {
+    const updatedHistory = history.map((item) =>
+      item.id === id ? { ...item, status: "Rejected" } : item
+    );
+    setHistory(updatedHistory);
+  };
+
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
 
   const handleAddCardClick = () => {
     setShowForm(true);
@@ -309,11 +331,15 @@ const Earnings: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center items-center w-11/12 mt-5 gap-6">
+        <div className="flex flex-col lg:flex-row justify-center items-start w-11/12 mt-5 gap-6">
         <div className="flex flex-col justify-center items-start w-1/3 bg-white rounded p-4 ">
           <p className="text-lg font-bold mb-4">
             Widthdraw your money
           </p>
+          <div className="flex flex-col justify-center items-start mb-4">
+              <p className="text-lg font-bold">$16,590.00</p>
+              <p className="text-xs font-bold text-gray-500">Current Balance</p>
+          </div>
           <form 
             onSubmit={submitWidthdraw}
             className='w-full'
@@ -325,10 +351,11 @@ const Earnings: React.FC = () => {
                 name='amount'
                 type="text" 
                 placeholder='Amount'
+                onChange={handleAmountChange}
                 className="text-sm border border-gray-400 p-2 rounded border border-gray-300 w-full" 
                 required
                 />
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col justify-center items-start gap-4 mt-4">
                   <p className="font-bold">Choose Card for Withdrawal</p>
                   <div className="grid grid-cols-1 w-full gap-4">
                     {cards.map((card, index) => (
@@ -351,14 +378,16 @@ const Earnings: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700"
+                  className="px-4 py-2 bg-orange-600 border border-orange-200 text-white rounded hover:bg-transparent hover:border-orange-500 hover:text-orange-700 mt-5"
                 >
                 Widthsdraw Money
                 </button>
             </div>
           </form>
         </div>
-        <div className="w-2/3"></div>
+        <div className="w-2/3">
+            <WithdrawHistory onCancel={handleCancelWithdraw} history={history} />
+        </div>
         </div>
       </div>
       <div className="w-full">
