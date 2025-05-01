@@ -17,6 +17,10 @@ export interface ContentItem {
     content: string;
 }
 
+interface CurriculamProps {
+    setCurrentStep: (step: number) => void
+}
+
 const data: Section[] =[{
     id: 1 ,
     title: 'Section 1',
@@ -42,7 +46,7 @@ const data: Section[] =[{
     ]
 }]
 
-const Curriculum = () => {
+const Curriculum: React.FC<CurriculamProps> = ({setCurrentStep}) => {
     const [sectionData, setSectionData] = useState<Section[]>(data);
     const [addSectionCardVisible, setaddSectionCardVisible] = useState<boolean>(false);
     const [newSectionTitle, setNewSectionTitle] = useState<string>('');
@@ -127,6 +131,14 @@ const Curriculum = () => {
                 </div>
             </div>
         )}
+        <div className="flex justify-between items-center w-full">
+            <Button onClick={() => setCurrentStep(1)}>
+                Previous
+            </Button>
+            <Button onClick={() => setCurrentStep(3)}>
+                Save & Next
+            </Button>
+        </div>
     </div>
   )
 }

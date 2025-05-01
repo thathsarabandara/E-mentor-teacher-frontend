@@ -56,7 +56,7 @@ const CreateCourse: React.FC = () => {
         <AdvancedInformation setCurrentStep={setCurrentStep} />
       )}
       {currentStep === 2 && (
-        <Curriculum />
+        <Curriculum setCurrentStep={setCurrentStep} />
       )}
       {currentStep === 3 && (
         <div className="text-center text-gray-500">Publish Course Section</div>
