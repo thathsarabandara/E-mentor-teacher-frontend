@@ -34,14 +34,14 @@ const CreateCourse: React.FC = () => {
           <div
             key={step.name}
             onClick={() => handleNavigation(index)}
-            className={`flex items-center cursor-pointer w-1/4 mr-8 ${
+            className={`flex items-center cursor-pointer overflow-hidden w-1/4 mr-8 ${
               currentStep === index
                 ? "text-orange-500 font-semibold border-b-2 border-orange-500"
                 : "text-gray-600"
             }`}
           >
             <div className='text-gray-500 m-2'>{step.icon}</div>
-            {step.name}
+            <p className="text-gray-500 hidden sm:block">{step.name}</p>
           </div>
         ))}
       </div>
