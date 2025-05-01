@@ -135,8 +135,10 @@ const Curriculum: React.FC<CurriculamProps> = ({setCurrentStep}) => {
             <Button onClick={() => setCurrentStep(1)}>
                 Previous
             </Button>
-            <Button onClick={() => setCurrentStep(3)}>
-                Save & Next
+            <Button >
+                <a href="/teacher/mentor/mycourses" className="underline-none">
+                    Save & Publish
+                </a>
             </Button>
         </div>
     </div>

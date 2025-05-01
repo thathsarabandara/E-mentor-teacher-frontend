@@ -11,7 +11,6 @@ const steps = [
   { name: "Basic Information", icon: <FaInfoCircle /> },
   { name: "Advance Information", icon: <FaSlidersH /> },
   { name: "Curriculum", icon: <FaListOl /> },
-  { name: "Publish Course", icon: <FaUpload /> },
 ];
 
 
@@ -57,9 +56,6 @@ const CreateCourse: React.FC = () => {
       )}
       {currentStep === 2 && (
         <Curriculum setCurrentStep={setCurrentStep} />
-      )}
-      {currentStep === 3 && (
-        <div className="text-center text-gray-500">Publish Course Section</div>
       )}
     </div>
 
